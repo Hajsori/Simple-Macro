@@ -1,33 +1,67 @@
 package xyz.hajsori.simplestreamdeck;
 
 import de.maxhenkel.voicechat.VoicechatClient;
+import de.maxhenkel.voicechat.gui.group.GroupScreen;
+import de.maxhenkel.voicechat.gui.group.JoinGroupScreen;
+import de.maxhenkel.voicechat.gui.onboarding.OnboardingManager;
+import de.maxhenkel.voicechat.gui.volume.AdjustVolumesScreen;
 import de.maxhenkel.voicechat.voice.client.ClientManager;
 import de.maxhenkel.voicechat.voice.client.ClientPlayerStateManager;
+import de.maxhenkel.voicechat.voice.client.ClientVoicechat;
+import de.maxhenkel.voicechat.voice.common.ClientGroup;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.text.Text;
 import xyz.hajsori.simplestreamdeck.websocket.SimpleWebSocketClient;
 
 public class ActionManager {
-    ClientPlayerStateManager playerStates = ClientManager.getPlayerStateManager();
-
     public ActionManager(String action, SimpleWebSocketClient ws) {
+        ClientVoicechat client = ClientManager.getClient();
+        MinecraftClient minecraft = MinecraftClient.getInstance();
+        ClientPlayerStateManager playerStates = ClientManager.getPlayerStateManager();
+System.out.println(action);
         switch (action) {
             case "toggleMicrophone":
                 boolean muted = !playerStates.isMuted();
                 playerStates.setMuted(muted);
-                ws.send("{isMuted:" + muted + "}");
+                ws.send("{\"isMuted\":" + muted + "}");
                 break;
             case "toggleVoicechat":
                 boolean disabled = !playerStates.isDisabled();
                 playerStates.setDisabled(disabled);
-                ws.send("{isDisabled:" + disabled + "}");
+                ws.send("{\"isDisabled\":" + disabled + "}");
                 break;
             case "toggleIcons":
                 boolean hidden = !VoicechatClient.CLIENT_CONFIG.hideIcons.get();
                 VoicechatClient.CLIENT_CONFIG.hideIcons.set(hidden);
-                ws.send("{isHidden:" + hidden + "}");
+                ws.send("{\"isHidden\":" + hidden + "}");
                 break;
             case "toggleRecording":
-                ClientManager.getClient().toggleRecording();
+                if (client != null) {
+                    client.toggleRecording();
+                }
                 break;
+            case "adjustVolumes":
+                minecraft.setScreen(new AdjustVolumesScreen());
+                break;
+            case "groupManagement":
+                if (client != null && client.getConnection() != null && client.getConnection().getData().groupsEnabled()) {
+                    ClientGroup group = playerStates.getGroup();
+                    if (group != null) {
+                        minecraft.setScreen(new GroupScreen(group));
+                    } else {
+                        minecraft.setScreen(new JoinGroupScreen());
+                    }
+                } else {
+                    ClientPlayerEntity player = minecraft.player;
+                    if (player != null) {
+                        player.sendMessage(Text.translatable("message.voicechat.groups_disabled"), true);
+                    }
+                }
+                break;
+            case "pushToTalkActive":
+
         }
     }
 }
