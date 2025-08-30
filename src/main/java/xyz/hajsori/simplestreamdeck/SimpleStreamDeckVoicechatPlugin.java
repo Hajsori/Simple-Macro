@@ -4,10 +4,6 @@ import de.maxhenkel.voicechat.api.VoicechatApi;
 import de.maxhenkel.voicechat.api.VoicechatPlugin;
 import de.maxhenkel.voicechat.api.events.ClientVoicechatInitializationEvent;
 import de.maxhenkel.voicechat.api.events.EventRegistration;
-import xyz.hajsori.simplestreamdeck.websocket.SimpleWebSocketClient;
-
-import java.net.URI;
-import java.net.URISyntaxException;
 
 public class SimpleStreamDeckVoicechatPlugin implements VoicechatPlugin {
 
@@ -41,10 +37,10 @@ public class SimpleStreamDeckVoicechatPlugin implements VoicechatPlugin {
 
 
     public void onClientVoicechatInitialization(ClientVoicechatInitializationEvent event) {
-        try {
+        /*try {
             new SimpleWebSocketClient(new URI("ws://localhost:8080")).connectToStreamDeck();
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
-        }
+        }*/
     }
 }

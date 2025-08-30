@@ -10,13 +10,12 @@ import de.maxhenkel.voicechat.voice.client.ClientPlayerStateManager;
 import de.maxhenkel.voicechat.voice.client.ClientVoicechat;
 import de.maxhenkel.voicechat.voice.common.ClientGroup;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.text.Text;
-import xyz.hajsori.simplestreamdeck.websocket.SimpleWebSocketClient;
+import org.java_websocket.WebSocket;
 
 public class ActionManager {
-    public ActionManager(String action, SimpleWebSocketClient ws) {
+    public ActionManager(String action, WebSocket ws) {
         ClientVoicechat client = ClientManager.getClient();
         MinecraftClient minecraft = MinecraftClient.getInstance();
         ClientPlayerStateManager playerStates = ClientManager.getPlayerStateManager();
