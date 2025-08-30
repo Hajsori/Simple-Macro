@@ -1,4 +1,4 @@
-package xyz.hajsori.simplestreamdeck;
+package xyz.hajsori.simplemacro;
 
 import de.maxhenkel.voicechat.configbuilder.ConfigBuilder;
 import de.maxhenkel.voicechat.configbuilder.entry.ConfigEntry;

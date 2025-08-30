@@ -1,27 +1,26 @@
 {
   "schemaVersion": 1,
-  "id": "simplestreamdeck",
+  "id": "simplemacro",
   "version": "${version}",
-  "name": "Simple Stream Deck",
-  "description": "With Simple Stream Deck you can control Simple Voice Chat with your Stream Deck",
+  "name": "Simple Macro",
+  "description": "With Simple Macro you can control Simple Voice Chat with your Stream Deck",
   "authors": [],
   "contact": {},
   "license": "All-Rights-Reserved",
-  "icon": "assets/simplestreamdeck/icon.png",
+  "icon": "assets/simplemacro/icon.png",
   "environment": "client",
   "entrypoints": {
     "client": [
-      "xyz.hajsori.simplestreamdeck.client.SimpleStreamDeckClient"
+      "xyz.hajsori.simplemacro.client.SimpleMacroClient"
     ],
     "main": [
-      "xyz.hajsori.simplestreamdeck.SimpleStreamDeck"
+      "xyz.hajsori.simplemacro.SimpleMacro"
     ],
     "voicechat": [
-      "xyz.hajsori.simplestreamdeck.SimpleStreamDeckVoicechatPlugin"
+      "xyz.hajsori.simplemacro.SimpleMacroVoicechatPlugin"
     ]
   },
   "mixins": [
-    "simplestreamdeck.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=${loader_version}",

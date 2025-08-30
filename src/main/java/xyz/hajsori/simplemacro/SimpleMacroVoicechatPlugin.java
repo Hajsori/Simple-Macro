@@ -1,18 +1,18 @@
-package xyz.hajsori.simplestreamdeck;
+package xyz.hajsori.simplemacro;
 
 import de.maxhenkel.voicechat.api.VoicechatApi;
 import de.maxhenkel.voicechat.api.VoicechatPlugin;
 import de.maxhenkel.voicechat.api.events.ClientVoicechatInitializationEvent;
 import de.maxhenkel.voicechat.api.events.EventRegistration;
 
-public class SimpleStreamDeckVoicechatPlugin implements VoicechatPlugin {
+public class SimpleMacroVoicechatPlugin implements VoicechatPlugin {
 
     /**
      * @return the unique ID for this voice chat plugin
      */
     @Override
     public String getPluginId() {
-        return SimpleStreamDeck.MOD_ID;
+        return SimpleMacro.MOD_ID;
     }
 
     /**
@@ -22,7 +22,7 @@ public class SimpleStreamDeckVoicechatPlugin implements VoicechatPlugin {
      */
     @Override
     public void initialize(VoicechatApi api) {
-        SimpleStreamDeck.LOGGER.info("Example voice chat plugin initialized!");
+        SimpleMacro.LOGGER.info("Example voice chat plugin initialized!");
     }
 
     /**

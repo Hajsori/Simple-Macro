@@ -1,12 +1,13 @@
-package xyz.hajsori.simplestreamdeck.websocket;
+package xyz.hajsori.simplemacro.websocket;
 
 import com.google.gson.JsonObject;
 import de.maxhenkel.voicechat.VoicechatClient;
 import de.maxhenkel.voicechat.voice.client.ClientManager;
 import de.maxhenkel.voicechat.voice.client.ClientPlayerStateManager;
+import org.java_websocket.WebSocket;
 import org.java_websocket.handshake.ClientHandshake;
 import org.slf4j.Logger;
-import xyz.hajsori.simplestreamdeck.ActionManager;
+import xyz.hajsori.simplemacro.ActionManager;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -21,7 +22,7 @@ public class WebSocketServer extends org.java_websocket.server.WebSocketServer {
 
 
     @Override
-    public void onOpen(org.java_websocket.WebSocket webSocket, ClientHandshake clientHandshake) {
+    public void onOpen(WebSocket webSocket, ClientHandshake clientHandshake) {
         LOGGER.info("Connected to WebSocket Client with Port {}", this.getPort());
 
         ClientPlayerStateManager manager = ClientManager.getPlayerStateManager();
@@ -36,18 +37,18 @@ public class WebSocketServer extends org.java_websocket.server.WebSocketServer {
     }
 
     @Override
-    public void onClose(org.java_websocket.WebSocket webSocket, int i, String s, boolean b) {
+    public void onClose(WebSocket webSocket, int i, String s, boolean b) {
         LOGGER.info("Disconnected from WebSocket Client with Port {}", this.getPort());
     }
 
     @Override
-    public void onMessage(org.java_websocket.WebSocket webSocket, String s) {
+    public void onMessage(WebSocket webSocket, String s) {
         System.out.println("Received message: " + s);
         new ActionManager(s, webSocket);
     }
 
     @Override
-    public void onError(org.java_websocket.WebSocket webSocket, Exception e) {
+    public void onError(WebSocket webSocket, Exception e) {
 
     }
 

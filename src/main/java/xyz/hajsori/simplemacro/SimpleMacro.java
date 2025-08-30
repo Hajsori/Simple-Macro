@@ -1,4 +1,4 @@
-package xyz.hajsori.simplestreamdeck;
+package xyz.hajsori.simplemacro;
 
 import de.maxhenkel.voicechat.configbuilder.ConfigBuilder;
 import net.fabricmc.api.EnvType;
@@ -6,13 +6,12 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import xyz.hajsori.simplestreamdeck.websocket.WebSocketServer;
+import xyz.hajsori.simplemacro.websocket.WebSocketServer;
 
-import java.awt.*;
 import java.nio.file.Path;
 
-public class SimpleStreamDeck implements ModInitializer {
-    public static final String MOD_ID = "simplestreamdeck";
+public class SimpleMacro implements ModInitializer {
+    public static final String MOD_ID = "simplemacro";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
     @Override
@@ -22,7 +21,7 @@ public class SimpleStreamDeck implements ModInitializer {
             return;
         }
 
-        ConfigBuilder.builder(ClientConfig::new).path(Path.of(".").resolve("config").resolve(MOD_ID).resolve("simplemakro-client.properties")).build();
+        ConfigBuilder.builder(ClientConfig::new).path(Path.of(".").resolve("config").resolve(MOD_ID).resolve("simplemacro-client.properties")).build();
 
         WebSocketServer wss = new WebSocketServer(LOGGER);
         wss.start();
