@@ -1,6 +1,8 @@
 package xyz.hajsori.simplemacro;
 
 import de.maxhenkel.voicechat.VoicechatClient;
+import de.maxhenkel.voicechat.gui.VoiceChatScreen;
+import de.maxhenkel.voicechat.gui.VoiceChatSettingsScreen;
 import de.maxhenkel.voicechat.gui.group.GroupScreen;
 import de.maxhenkel.voicechat.gui.group.JoinGroupScreen;
 import de.maxhenkel.voicechat.gui.volume.AdjustVolumesScreen;
@@ -18,7 +20,7 @@ public class ActionManager {
         ClientVoicechat client = ClientManager.getClient();
         MinecraftClient minecraft = MinecraftClient.getInstance();
         ClientPlayerStateManager playerStates = ClientManager.getPlayerStateManager();
-System.out.println(action);
+
         switch (action) {
             case "toggleMicrophone":
                 boolean muted = !playerStates.isMuted();
@@ -58,8 +60,11 @@ System.out.println(action);
                     }
                 }
                 break;
-            case "pushToTalkActive":
-
+            case "voicechatMenu":
+                minecraft.setScreen(new VoiceChatScreen());
+                break;
+            case "settingsMenu":
+                minecraft.setScreen(new VoiceChatSettingsScreen());
         }
     }
 }

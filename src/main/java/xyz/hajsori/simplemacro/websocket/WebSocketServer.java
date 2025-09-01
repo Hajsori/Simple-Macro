@@ -8,16 +8,20 @@ import org.java_websocket.WebSocket;
 import org.java_websocket.handshake.ClientHandshake;
 import org.slf4j.Logger;
 import xyz.hajsori.simplemacro.ActionManager;
+import xyz.hajsori.simplemacro.ClientConfig;
+import xyz.hajsori.simplemacro.SimpleMacro;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
 
 public class WebSocketServer extends org.java_websocket.server.WebSocketServer {
-    private static Logger LOGGER = null;
+    private static Logger LOGGER;
+    private static ClientConfig CLIENT_CONFIG;
 
-    public WebSocketServer(Logger LOGGER) {
+    public WebSocketServer() {
         super(new InetSocketAddress(0));
-        WebSocketServer.LOGGER = LOGGER;
+        WebSocketServer.LOGGER = SimpleMacro.LOGGER;
+        WebSocketServer.CLIENT_CONFIG = SimpleMacro.CLIENT_CONFIG;
     }
 
 
@@ -42,9 +46,11 @@ public class WebSocketServer extends org.java_websocket.server.WebSocketServer {
     }
 
     @Override
-    public void onMessage(WebSocket webSocket, String s) {
-        System.out.println("Received message: " + s);
-        new ActionManager(s, webSocket);
+    public void onMessage(WebSocket webSocket, String message) {
+        if (CLIENT_CONFIG.logMessages.get()) {
+            LOGGER.info("Received message from WebSocket Client with Port {}: {}", this.getPort(), message);
+        }
+        new ActionManager(message, webSocket);
     }
 
     @Override

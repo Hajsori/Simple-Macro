@@ -13,6 +13,7 @@ import java.nio.file.Path;
 public class SimpleMacro implements ModInitializer {
     public static final String MOD_ID = "simplemacro";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+    public static ClientConfig CLIENT_CONFIG;
 
     @Override
     public void onInitialize() {
@@ -21,9 +22,9 @@ public class SimpleMacro implements ModInitializer {
             return;
         }
 
-        ConfigBuilder.builder(ClientConfig::new).path(Path.of(".").resolve("config").resolve(MOD_ID).resolve("simplemacro-client.properties")).build();
+        CLIENT_CONFIG = ConfigBuilder.builder(ClientConfig::new).path(Path.of(".").resolve("config").resolve(MOD_ID).resolve("simplemacro-client.properties")).build();
 
-        WebSocketServer wss = new WebSocketServer(LOGGER);
+        WebSocketServer wss = new WebSocketServer();
         wss.start();
     }
 }
