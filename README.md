@@ -9,3 +9,8 @@ With Simple Macro you can control Simple Voice Chat with your macro keyboard (e.
 With the [Simple Macro Stream Deck Plugin](https://marketplace.elgato.com/product/simple-macro) you can control Simple Voice Chat with your Elgato Stream Deck
 [![Works with Stream Deck](/img/badges/works-with-stream-deck--light.svg "Learn more about Stream Deck")](https://www.elgato.com/s/explore-stream-deck)
 ![Elgato Stream Deck example](https://cdn.modrinth.com/data/BYiBvpxg/images/e5e66ff0b9147fbf0586289a1e80b69a97c114a2.jpeg)
+
+
+## Credits
+- Thanks to henkelmax for creating the Simple Voice Chat mod and for allowing me to use the icons
+- This mod uses [Java Web-Socket](https://github.com/TooTallNate/Java-WebSocket)
