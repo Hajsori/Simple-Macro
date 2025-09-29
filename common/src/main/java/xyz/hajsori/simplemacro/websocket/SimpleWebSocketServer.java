@@ -5,6 +5,7 @@ import de.maxhenkel.voicechat.VoicechatClient;
 import de.maxhenkel.voicechat.voice.client.ClientManager;
 import de.maxhenkel.voicechat.voice.client.ClientPlayerStateManager;
 import de.maxhenkel.voicechat.voice.client.ClientVoicechat;
+import net.minecraft.Util;
 import org.java_websocket.WebSocket;
 import org.java_websocket.handshake.ClientHandshake;
 import org.java_websocket.server.WebSocketServer;
@@ -12,7 +13,6 @@ import org.slf4j.Logger;
 import xyz.hajsori.simplemacro.Constants;
 import xyz.hajsori.simplemacro.config.ClientConfig;
 
-import java.io.IOException;
 import java.net.InetSocketAddress;
 
 public class SimpleWebSocketServer extends WebSocketServer {
@@ -66,11 +66,6 @@ public class SimpleWebSocketServer extends WebSocketServer {
 
     @Override
     public void onStart() {
-        String url = "streamdeck://plugins/message/xyz.hajsori.simplemacro.streamdeck/wss?streamdeck=hidden&port=" + this.getPort();
-        try {
-            Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler \"" + url + "\"");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        Util.getPlatform().openUri("streamdeck://plugins/message/xyz.hajsori.simplemacro.streamdeck/wss?streamdeck=hidden&port=" + this.getPort());
     }
 }
