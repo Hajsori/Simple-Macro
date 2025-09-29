@@ -6,8 +6,9 @@ With Simple Macro you can control Simple Voice Chat with your macro keyboard (e.
 ## Compability
 
 ### Elgato Stream Deck
+[![](https://raw.githubusercontent.com/Hajsori/devins-badges/879a95d33a6e30e5cbc8adb7bac0621c5753f294/assets/cozy/available/elgato-marketplace_vector.svg)](https://marketplace.elgato.com/product/simple-macro-0808cf5b-b65d-472e-adbe-b2837416be76)
+
 With the [Simple Macro Stream Deck Plugin](https://marketplace.elgato.com/product/simple-macro) you can control Simple Voice Chat with your Elgato Stream Deck
-[![Works with Stream Deck](/img/badges/works-with-stream-deck--light.svg "Learn more about Stream Deck")](https://www.elgato.com/s/explore-stream-deck)
 ![Elgato Stream Deck example](https://cdn.modrinth.com/data/BYiBvpxg/images/e5e66ff0b9147fbf0586289a1e80b69a97c114a2.jpeg)
 
 
