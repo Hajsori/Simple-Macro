@@ -65,7 +65,7 @@ minecraft {
 sourceSets.main.resources.srcDir "src/generated/resources"
 
 dependencies {
-    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+    minecraft "net.minecraftforge:forge:${min_minecraft_version}-${forge_version}"
     annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
 
     implementation("net.sf.jopt-simple:jopt-simple:5.0.4") { version { strictly "5.0.4" } }
@@ -77,7 +77,7 @@ dependencies {
     }
 
     // Simple Voice Chat
-    implementation "maven.modrinth:simple-voice-chat:forge-${minecraft_version}-${svc_version}"
+    implementation "maven.modrinth:simple-voice-chat:forge-${svc_version}"
 }
 
 publishing {

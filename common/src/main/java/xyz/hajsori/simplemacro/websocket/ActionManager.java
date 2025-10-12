@@ -16,6 +16,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
 import org.java_websocket.WebSocket;
+import xyz.hajsori.simplemacro.config.ConsumeKeys;
 
 
 public class ActionManager {
@@ -85,28 +86,27 @@ public class ActionManager {
                 }
             }
             case "activate" -> {
-                minecraft.execute(() -> minecraft.gui.setOverlayMessage(Component.literal("Push To Talk and Whisper is currently not supported."), false));
-                /*String target = data.get("target").getAsString();
-                switch (target) {
-                    case "pushToTalk":
-                        pttManager.setPttDown(true);
-                        break;
-                    case "whisper":
-                        ((PTTKeyHandlerAccessor) ClientManager.getPttKeyHandler()).setWhisperKeyDown(true);
-                        break;
-                }*/
-            }
-            /*case "deactivate" -> {
                 String target = data.get("target").getAsString();
                 switch (target) {
                     case "pushToTalk":
-                        pttManager.setPttDown(false);
+                        ConsumeKeys.pttKeyDown = true;
                         break;
                     case "whisper":
-                        ((PTTKeyHandlerAccessor) ClientManager.getPttKeyHandler()).setWhisperKeyDown(false);
+                        ConsumeKeys.whisperKeyDown = true;
                         break;
                 }
-            }*/
+            }
+            case "deactivate" -> {
+                String target = data.get("target").getAsString();
+                switch (target) {
+                    case "pushToTalk":
+                        ConsumeKeys.pttKeyDown = false;
+                        break;
+                    case "whisper":
+                        ConsumeKeys.whisperKeyDown = false;
+                        break;
+                }
+            }
             case "getData" -> {
                 JsonArray targets = data.get("targets").getAsJsonArray();
                 JsonObject answer = new JsonObject();

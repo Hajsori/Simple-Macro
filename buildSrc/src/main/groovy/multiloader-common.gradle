@@ -81,7 +81,8 @@ processResources {
     var expandProps = ["version"                      : version,
                        "group"                        : project.group, //Else we target the task"s group.
                        "minecraft_version"            : minecraft_version,
-                       "minecraft_version_range"      : minecraft_version_range,
+                       "min_minecraft_version"        : min_minecraft_version,
+                       "max_minecraft_version"        : max_minecraft_version,
                        "fabric_loader_version"        : fabric_loader_version,
                        "mod_name"                     : mod_name,
                        "mod_author"                   : mod_author,

@@ -15,7 +15,7 @@ dependencies {
     include "org.java-websocket:Java-WebSocket:${websocket_version}"
 
     // Simple Voice Chat
-    modImplementation "maven.modrinth:simple-voice-chat:fabric-${minecraft_version}-${svc_version}"
+    modImplementation "maven.modrinth:simple-voice-chat:fabric-${svc_version}"
 }
 
 loom {

@@ -54,7 +54,7 @@ repositories {
 
 dependencies {
     // Simple Voice Chat
-    implementation "maven.modrinth:simple-voice-chat:neoforge-${minecraft_version}-${svc_version}"
+    implementation "maven.modrinth:simple-voice-chat:neoforge-${svc_version}"
 
     // WebSocket
     jarJar(implementation("org.java-websocket:Java-WebSocket:${websocket_version}"))

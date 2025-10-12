@@ -25,7 +25,7 @@ dependencies {
     implementation "org.java-websocket:Java-WebSocket:${websocket_version}"
 
     // Simple Voice Chat
-    implementation "maven.modrinth:simple-voice-chat:neoforge-${minecraft_version}-${svc_version}"
+    implementation "maven.modrinth:simple-voice-chat:neoforge-${svc_version}"
 }
 
 configurations {
