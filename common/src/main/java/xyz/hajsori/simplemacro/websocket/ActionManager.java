@@ -16,6 +16,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
 import org.java_websocket.WebSocket;
+import xyz.hajsori.simplemacro.Constants;
 import xyz.hajsori.simplemacro.config.ConsumeKeys;
 
 
@@ -134,5 +135,7 @@ public class ActionManager {
                 ws.send(answer.toString());
             }
         }
+
+        Constants.LOGGER.info(String.valueOf(ConsumeKeys.pttKeyDown));
     }
 }

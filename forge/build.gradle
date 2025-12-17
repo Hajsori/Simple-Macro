@@ -1,7 +1,7 @@
 plugins {
     id "multiloader-loader"
     id "net.minecraftforge.gradle" version "[6.0.24,6.2)"
-    id "org.spongepowered.mixin" version "0.7-SNAPSHOT"
+    id "org.spongepowered.mixin" version "0.7.+"
 }
 
 base {
@@ -9,11 +9,15 @@ base {
 }
 
 mixin {
+    add sourceSets.main, "${mod_id}.refmap.json"
+
     config("${mod_id}.mixins.json")
     config("${mod_id}.forge.mixins.json")
 }
 
 jarJar.enable()
+
+tasks.named("jarJar") {}
 
 minecraft {
     mappings channel: "official", version: minecraft_version
@@ -66,15 +70,13 @@ sourceSets.main.resources.srcDir "src/generated/resources"
 
 dependencies {
     minecraft "net.minecraftforge:forge:${min_minecraft_version}-${forge_version}"
-    annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
+    annotationProcessor("org.spongepowered:mixin:0.8.7:processor")
 
     implementation("net.sf.jopt-simple:jopt-simple:5.0.4") { version { strictly "5.0.4" } }
 
-    // WebSocket
-    compileOnly("org.java-websocket:Java-WebSocket:${websocket_version}")
-    implementation(jarJar("org.java-websocket:Java-WebSocket:${websocket_version}")) {
-        jarJar.ranged(it, "[${websocket_version},)")
-    }
+    // WebSocketwebsocket_version}")
+    minecraftLibrary "org.java-websocket:Java-WebSocket:${websocket_version}"
+    jarJar("org.java-websocket:Java-WebSocket:[${websocket_version},3.0)")
 
     // Simple Voice Chat
     implementation "maven.modrinth:simple-voice-chat:forge-${svc_version}"
