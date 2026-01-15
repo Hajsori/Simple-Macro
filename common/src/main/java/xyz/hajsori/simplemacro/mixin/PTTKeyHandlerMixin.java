@@ -5,7 +5,6 @@ import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
-import xyz.hajsori.simplemacro.Constants;
 import xyz.hajsori.simplemacro.config.ConsumeKeys;
 
 @Debug(export = true)
@@ -16,19 +15,16 @@ public class PTTKeyHandlerMixin {
 
     @Overwrite(remap = false)
     public boolean isPTTDown() {
-        Constants.LOGGER.info("PTTKeyHandler: isPTTDown");
         return pttKeyDown || ConsumeKeys.pttKeyDown;
     }
 
     @Overwrite(remap = false)
     public boolean isWhisperDown() {
-        Constants.LOGGER.info("PTTKeyHandler: isWhisperDown");
         return whisperKeyDown || ConsumeKeys.whisperKeyDown;
     }
 
     @Overwrite(remap = false)
     public boolean isAnyDown() {
-        Constants.LOGGER.info("PTTKeyHandler: isAnyDown");
         return pttKeyDown || whisperKeyDown || ConsumeKeys.pttKeyDown || ConsumeKeys.whisperKeyDown;
     }
 }
