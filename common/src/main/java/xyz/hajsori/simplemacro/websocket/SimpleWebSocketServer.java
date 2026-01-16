@@ -66,6 +66,10 @@ public class SimpleWebSocketServer extends WebSocketServer {
 
     @Override
     public void onStart() {
+        if (CLIENT_CONFIG.logMessages.get()) {
+            LOGGER.info("Started WebSocket Server on port {}", this.getPort());
+        }
+
         Util.getPlatform().openUri("streamdeck://plugins/message/xyz.hajsori.simplemacro.streamdeck/wss?streamdeck=hidden&port=" + this.getPort());
     }
 }
