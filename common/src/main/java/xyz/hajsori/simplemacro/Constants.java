@@ -7,7 +7,7 @@ import xyz.hajsori.simplemacro.config.ClientConfig;
 public class Constants {
     public static final String MOD_ID = "simplemacro";
     public static final String MOD_NAME = "Simple Macro";
-    public static final String MOD_VERSION = "1.21.4-1.1.0";
+    public static final String MOD_VERSION = "1.21.11-1.1.0";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_NAME);
     public static ClientConfig CLIENT_CONFIG;
 }
