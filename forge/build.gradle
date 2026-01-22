@@ -5,7 +5,7 @@ plugins {
 }
 
 base {
-    archivesName = "${mod_name}-forge"
+    archivesName = "${mod_id}-forge"
 }
 
 mixin {
@@ -108,5 +108,19 @@ repositories {
         filter {
             includeGroup "maven.modrinth"
         }
+    }
+}
+
+tasks.named("jar", Jar) {
+    manifest {
+        attributes([
+                "Specification-Title"     : mod_id,
+                "Specification-Vendor"    : mod_author,
+                "Specification-Version"   : version,
+                "Implementation-Title"    : project.name,
+                "Implementation-Version"  : version,
+                "Implementation-Vendor"   : mod_author
+        ])
+        attributes["MixinConfigs"] = "${mod_id}.mixins.json"
     }
 }

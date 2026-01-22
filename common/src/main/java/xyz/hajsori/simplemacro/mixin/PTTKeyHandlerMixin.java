@@ -3,32 +3,30 @@ package xyz.hajsori.simplemacro.mixin;
 import de.maxhenkel.voicechat.voice.client.PTTKeyHandler;
 import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
-import xyz.hajsori.simplemacro.Constants;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import xyz.hajsori.simplemacro.config.ConsumeKeys;
 
 @Debug(export = true)
 @Mixin(PTTKeyHandler.class)
 public class PTTKeyHandlerMixin {
-    @Shadow(remap = false) private boolean pttKeyDown;
-    @Shadow(remap = false) private boolean whisperKeyDown;
+    @Shadow() private boolean pttKeyDown;
+    @Shadow() private boolean whisperKeyDown;
 
-    @Overwrite(remap = false)
-    public boolean isPTTDown() {
-        Constants.LOGGER.info("PTTKeyHandler: isPTTDown");
-        return pttKeyDown || ConsumeKeys.pttKeyDown;
+    @Inject(method = "isPTTDown", at = @At("RETURN"), cancellable = true, remap = false)
+    public void isPTTDown(CallbackInfoReturnable<Boolean> cir) {
+        cir.setReturnValue(pttKeyDown || ConsumeKeys.pttKeyDown);
     }
 
-    @Overwrite(remap = false)
-    public boolean isWhisperDown() {
-        Constants.LOGGER.info("PTTKeyHandler: isWhisperDown");
-        return whisperKeyDown || ConsumeKeys.whisperKeyDown;
+    @Inject(method = "isWhisperDown", at = @At("RETURN"), cancellable = true, remap = false)
+    public void isWhisperDown(CallbackInfoReturnable<Boolean> cir) {
+        cir.setReturnValue(whisperKeyDown || ConsumeKeys.whisperKeyDown);
     }
 
-    @Overwrite(remap = false)
-    public boolean isAnyDown() {
-        Constants.LOGGER.info("PTTKeyHandler: isAnyDown");
-        return pttKeyDown || whisperKeyDown || ConsumeKeys.pttKeyDown || ConsumeKeys.whisperKeyDown;
+    @Inject(method = "isAnyDown", at = @At("RETURN"), cancellable = true, remap = false)
+    public void isAnyDown(CallbackInfoReturnable<Boolean> cir) {
+        cir.setReturnValue(pttKeyDown || whisperKeyDown || ConsumeKeys.pttKeyDown || ConsumeKeys.whisperKeyDown);
     }
 }
