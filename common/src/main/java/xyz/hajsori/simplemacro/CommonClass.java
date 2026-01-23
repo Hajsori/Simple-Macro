@@ -13,7 +13,7 @@ public class CommonClass {
     public static void init() {
         Constants.LOGGER.info("Simple Macro Common Initialized");
         Constants.CLIENT_CONFIG = ConfigBuilder.builder(ClientConfig::new).path(Path.of(".").resolve("config").resolve(MOD_ID).resolve(MOD_ID + "-client.properties")).build();
-        Constants.LOGGER.info("Simple Macro Log Messages is set to " + Constants.CLIENT_CONFIG.logMessages.get());
+        Constants.LOGGER.info("Simple Macro Log Messages is set to {}", Constants.CLIENT_CONFIG.logMessages.get());
 
         SimpleWebSocketServer wss = new SimpleWebSocketServer();
         wss.start();
