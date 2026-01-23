@@ -11,11 +11,10 @@ import static xyz.hajsori.simplemacro.Constants.MOD_ID;
 
 public class CommonClass {
     public static void init() {
-        if (Services.PLATFORM.isModLoaded(MOD_ID)) {
-            Constants.CLIENT_CONFIG = ConfigBuilder.builder(ClientConfig::new).path(Path.of(".").resolve("config").resolve(MOD_ID).resolve(MOD_ID + "-client.properties")).build();
+        Constants.LOGGER.info("Simple Macro Common Initialized");
+        Constants.CLIENT_CONFIG = ConfigBuilder.builder(ClientConfig::new).path(Path.of(".").resolve("config").resolve(MOD_ID).resolve(MOD_ID + "-client.properties")).build();
 
-            SimpleWebSocketServer wss = new SimpleWebSocketServer();
-            wss.start();
-        }
+        SimpleWebSocketServer wss = new SimpleWebSocketServer();
+        wss.start();
     }
 }

@@ -12,7 +12,7 @@
     "discord": "https://discord.gg/jNxD65JBCv"
   },
   "license": "${license}",
-  "icon": "assets/simplemacro/icon.png",
+  "icon": "assets/${mod_id}/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
