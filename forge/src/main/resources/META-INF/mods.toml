@@ -15,8 +15,6 @@ authors = "${mod_author}" #optional
 description = '''${description}''' #mandatory Supports multiline text
 [[mixins]]
 config = "${mod_id}.mixins.json"
-[[mixins]]
-config = "${mod_id}.forge.mixins.json"
 [[dependencies."${mod_id}"]] #optional
 modId = "forge" #mandatory
 mandatory = true #mandatory

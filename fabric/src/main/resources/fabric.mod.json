@@ -20,8 +20,7 @@
     ]
   },
   "mixins": [
-    "simplemacro.mixins.json",
-    "simplemacro.fabric.mixins.json"
+    "simplemacro.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=${fabric_loader_version}",

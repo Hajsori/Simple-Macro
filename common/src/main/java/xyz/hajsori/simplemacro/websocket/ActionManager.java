@@ -74,7 +74,7 @@ public class ActionManager {
                         } else {
                             LocalPlayer player = minecraft.player;
                             if (player != null) {
-                                player.sendSystemMessage(Component.translatable("message.voicechat.groups_disabled"));
+                                player.displayClientMessage(Component.translatable("message.voicechat.groups_disabled"), true);
                             }
                         }
                         break;

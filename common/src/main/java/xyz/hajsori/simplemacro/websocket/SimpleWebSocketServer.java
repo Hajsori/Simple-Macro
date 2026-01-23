@@ -16,20 +16,16 @@ import xyz.hajsori.simplemacro.config.ClientConfig;
 import java.net.InetSocketAddress;
 
 public class SimpleWebSocketServer extends WebSocketServer {
-    private static Logger LOGGER;
-    private static ClientConfig CLIENT_CONFIG;
 
     public SimpleWebSocketServer() {
         super(new InetSocketAddress(0));
-        SimpleWebSocketServer.LOGGER = Constants.LOGGER;
-        SimpleWebSocketServer.CLIENT_CONFIG = Constants.CLIENT_CONFIG;
     }
 
 
     @Override
     public void onOpen(WebSocket webSocket, ClientHandshake clientHandshake) {
-        if (CLIENT_CONFIG.logMessages.get()) {
-            LOGGER.info("Connected to WebSocket Client with Port {}", this.getPort());
+        if (Constants.CLIENT_CONFIG.logMessages.get()) {
+            Constants.LOGGER.info("Connected to WebSocket Client with Port {}", this.getPort());
         }
 
         ClientPlayerStateManager manager = ClientManager.getPlayerStateManager();
@@ -46,22 +42,22 @@ public class SimpleWebSocketServer extends WebSocketServer {
 
     @Override
     public void onClose(WebSocket webSocket, int i, String s, boolean b) {
-        if (CLIENT_CONFIG.logMessages.get()) {
-            LOGGER.info("Disconnected from WebSocket Client with Port {}", this.getPort());
+        if (Constants.CLIENT_CONFIG.logMessages.get()) {
+            Constants.LOGGER.info("Disconnected from WebSocket Client with Port {}", this.getPort());
         }
     }
 
     @Override
     public void onMessage(WebSocket webSocket, String message) {
-        if (CLIENT_CONFIG.logMessages.get()) {
-            LOGGER.info("Received message from WebSocket Client with Port {}: {}", this.getPort(), message);
+        if (Constants.CLIENT_CONFIG.logMessages.get()) {
+            Constants.LOGGER.info("Received message from WebSocket Client with Port {}: {}", this.getPort(), message);
         }
         new ActionManager(message, webSocket);
     }
 
     @Override
     public void onError(WebSocket webSocket, Exception e) {
-
+        Constants.LOGGER.error("Simple Macro WebSocket Server ran into an Problem: " + e);
     }
 
     @Override

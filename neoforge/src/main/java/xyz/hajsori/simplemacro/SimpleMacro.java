@@ -8,12 +8,7 @@ import net.neoforged.fml.common.Mod;
 public class SimpleMacro {
 
     public SimpleMacro(IEventBus eventBus) {
-        // This method is invoked by the NeoForge mod loader when it is ready
-        // to load your mod. You can access NeoForge and Common code in this
-        // project.
-
-        // Use NeoForge to bootstrap the Common mod.
-        Constants.LOGGER.info("Hello NeoForge world!");
+        Constants.LOGGER.info("Simple Macro NeoForge Initialized");
         CommonClass.init();
     }
 }
