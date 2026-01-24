@@ -23,7 +23,7 @@ neoForge {
             client()
         }
         data {
-            data()
+            clientData()
         }
         server {
             server()
@@ -58,5 +58,5 @@ dependencies {
 
     // WebSocket
     jarJar(implementation("org.java-websocket:Java-WebSocket:${websocket_version}"))
-    additionalRuntimeClasspath "org.java-websocket:Java-WebSocket:${websocket_version}"
+    implementation "org.java-websocket:Java-WebSocket:${websocket_version}"
 }

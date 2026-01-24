@@ -5,13 +5,11 @@ import de.maxhenkel.voicechat.VoicechatClient;
 import de.maxhenkel.voicechat.voice.client.ClientManager;
 import de.maxhenkel.voicechat.voice.client.ClientPlayerStateManager;
 import de.maxhenkel.voicechat.voice.client.ClientVoicechat;
-import net.minecraft.Util;
+import net.minecraft.util.Util;
 import org.java_websocket.WebSocket;
 import org.java_websocket.handshake.ClientHandshake;
 import org.java_websocket.server.WebSocketServer;
-import org.slf4j.Logger;
 import xyz.hajsori.simplemacro.Constants;
-import xyz.hajsori.simplemacro.config.ClientConfig;
 
 import java.net.InetSocketAddress;
 
