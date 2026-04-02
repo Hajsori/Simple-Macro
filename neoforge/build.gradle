@@ -10,22 +10,27 @@ neoForge {
     if (at.exists()) {
         accessTransformers.from at.absolutePath
     }
-    parchment {
-        minecraftVersion = parchment_minecraft
-        mappingsVersion = parchment_version
-    }
     runs {
         configureEach {
-            systemProperty("neoforge.enabledGameTestNamespaces", mod_id)
+            systemProperty('neoforge.enabledGameTestNamespaces', mod_id)
             ideName = "NeoForge ${it.name.capitalize()} (${project.path})" // Unify the run config names with fabric
         }
         client {
             client()
+
+            systemProperty 'neoforge.enabledGameTestNamespaces', mod_id
         }
         data {
             clientData()
+            programArguments.addAll '--mod', mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
+        }
+        gameTestServer {
+            type = "gameTestServer"
+            systemProperty 'neoforge.enabledGameTestNamespaces', mod_id
         }
         server {
+            programArgument '--nogui'
+            systemProperty 'neoforge.enabledGameTestNamespaces', mod_id
             server()
         }
     }
@@ -39,16 +44,9 @@ neoForge {
 sourceSets.main.resources { srcDir "src/generated/resources" }
 
 repositories {
-    exclusiveContent {
-        forRepository {
-            maven {
-                name = "Modrinth"
-                url = "https://api.modrinth.com/maven"
-            }
-        }
-        filter {
-            includeGroup "maven.modrinth"
-        }
+    maven {
+        name = 'Modrinth'
+        url = 'https://api.modrinth.com/maven'
     }
 }
 

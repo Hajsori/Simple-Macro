@@ -2,7 +2,6 @@ package xyz.hajsori.simplemacro;
 
 import de.maxhenkel.voicechat.configbuilder.ConfigBuilder;
 import xyz.hajsori.simplemacro.config.ClientConfig;
-import xyz.hajsori.simplemacro.platform.Services;
 import xyz.hajsori.simplemacro.websocket.SimpleWebSocketServer;
 
 import java.nio.file.Path;
