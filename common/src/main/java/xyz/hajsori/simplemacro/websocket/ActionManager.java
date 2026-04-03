@@ -10,6 +10,8 @@ import de.maxhenkel.voicechat.gui.VoiceChatSettingsScreen;
 import de.maxhenkel.voicechat.gui.group.GroupScreen;
 import de.maxhenkel.voicechat.gui.group.JoinGroupScreen;
 import de.maxhenkel.voicechat.gui.volume.AdjustVolumesScreen;
+import de.maxhenkel.voicechat.net.ClientServerNetManager;
+import de.maxhenkel.voicechat.net.JoinGroupPacket;
 import de.maxhenkel.voicechat.voice.client.*;
 import de.maxhenkel.voicechat.voice.common.ClientGroup;
 import net.minecraft.client.Minecraft;
@@ -18,6 +20,9 @@ import net.minecraft.network.chat.Component;
 import org.java_websocket.WebSocket;
 import xyz.hajsori.simplemacro.Constants;
 import xyz.hajsori.simplemacro.config.ConsumeKeys;
+
+import java.util.Optional;
+import java.util.stream.Stream;
 
 
 public class ActionManager {
@@ -95,6 +100,11 @@ public class ActionManager {
                     case "whisper":
                         ConsumeKeys.whisperKeyDown = true;
                         break;
+                    case "joinGroup":
+                        ClientManager.getGroupManager().getGroups().stream().filter((g) -> g.getName().equals(data.get("group").getAsString())).findFirst().ifPresent((clientGroup) ->
+                                ClientServerNetManager.sendToServer(new JoinGroupPacket(clientGroup.getId(), data.get("password").getAsString()))
+                        );
+                        break;
                 }
             }
             case "deactivate" -> {
@@ -135,7 +145,5 @@ public class ActionManager {
                 ws.send(answer.toString());
             }
         }
-
-        Constants.LOGGER.info(String.valueOf(ConsumeKeys.pttKeyDown));
     }
 }
