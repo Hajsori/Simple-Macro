@@ -12,6 +12,7 @@ import de.maxhenkel.voicechat.gui.group.JoinGroupScreen;
 import de.maxhenkel.voicechat.gui.volume.AdjustVolumesScreen;
 import de.maxhenkel.voicechat.net.ClientServerNetManager;
 import de.maxhenkel.voicechat.net.JoinGroupPacket;
+import de.maxhenkel.voicechat.net.LeaveGroupPacket;
 import de.maxhenkel.voicechat.voice.client.*;
 import de.maxhenkel.voicechat.voice.common.ClientGroup;
 import net.minecraft.client.Minecraft;
@@ -115,6 +116,9 @@ public class ActionManager {
                         break;
                     case "whisper":
                         ConsumeKeys.whisperKeyDown = false;
+                        break;
+                    case "leaveGroup":
+                        ClientServerNetManager.sendToServer(new LeaveGroupPacket());
                         break;
                 }
             }
