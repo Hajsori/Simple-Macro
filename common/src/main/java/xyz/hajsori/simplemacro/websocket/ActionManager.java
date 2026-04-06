@@ -5,12 +5,14 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import de.maxhenkel.voicechat.VoicechatClient;
+import de.maxhenkel.voicechat.api.Group;
 import de.maxhenkel.voicechat.gui.VoiceChatScreen;
 import de.maxhenkel.voicechat.gui.VoiceChatSettingsScreen;
 import de.maxhenkel.voicechat.gui.group.GroupScreen;
 import de.maxhenkel.voicechat.gui.group.JoinGroupScreen;
 import de.maxhenkel.voicechat.gui.volume.AdjustVolumesScreen;
 import de.maxhenkel.voicechat.net.ClientServerNetManager;
+import de.maxhenkel.voicechat.net.CreateGroupPacket;
 import de.maxhenkel.voicechat.net.JoinGroupPacket;
 import de.maxhenkel.voicechat.net.LeaveGroupPacket;
 import de.maxhenkel.voicechat.voice.client.*;
@@ -103,7 +105,31 @@ public class ActionManager {
                         break;
                     case "joinGroup":
                         ClientManager.getGroupManager().getGroups().stream().filter((g) -> g.getName().equals(data.get("group").getAsString())).findFirst().ifPresent((clientGroup) ->
-                                ClientServerNetManager.sendToServer(new JoinGroupPacket(clientGroup.getId(), data.get("password").getAsString()))
+                                ClientServerNetManager.sendToServer(new JoinGroupPacket(clientGroup.getId(), data.get("password").getAsString().isEmpty() ? null : data.get("password").getAsString()))
+                        );
+                        break;
+                    case "createGroup":
+                        ClientServerNetManager.sendToServer(new CreateGroupPacket(
+                                data.get("group").getAsString(),
+                                data.get("password").getAsString().isEmpty() ? null : data.get("password").getAsString(),
+                                switch (data.get("type").getAsString()) {
+                                    case "OPEN" -> Group.Type.OPEN;
+                                    case "ISOLATED" -> Group.Type.ISOLATED;
+                                    default -> Group.Type.NORMAL;
+                                }
+                        ));
+                        break;
+                    case "joinOrCreateGroup":
+                        String groupName = data.get("group").getAsString();
+                        String password = data.get("password").getAsString().isEmpty() ? null : data.get("password").getAsString();
+                        Group.Type type = switch (data.get("type").getAsString()) {
+                            case "OPEN" -> Group.Type.OPEN;
+                            case "ISOLATED" -> Group.Type.ISOLATED;
+                            default -> Group.Type.NORMAL;
+                        };
+                        ClientManager.getGroupManager().getGroups().stream().filter((g) -> g.getName().equals(groupName)).findFirst().ifPresentOrElse(
+                                (clientGroup) -> ClientServerNetManager.sendToServer(new JoinGroupPacket(clientGroup.getId(), password)),
+                                () -> ClientServerNetManager.sendToServer(new CreateGroupPacket(groupName, password, type))
                         );
                         break;
                 }
