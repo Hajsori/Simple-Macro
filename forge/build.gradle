@@ -56,16 +56,6 @@ dependencies {
     implementation "maven.modrinth:simple-voice-chat:forge-${svc_version}"
 
 
-    jarJar('org.apache.maven:maven-artifact:3.9.11') {
-        jarJar.configure(it) {
-            // This tells that we do NOT ship this library, but we depend on a specific version
-            // For more info see https://github.com/MinecraftForge/JarJar/blob/main/jarjar-gradle/src/main/java/net/minecraftforge/jarjar/gradle/JarJarMetadataInfo.java
-            constraint = true
-            version = '3.9.11'
-        }
-    }
-
-    // This will bundle the jar and set the constraints to [0.5.0,)
     jarJar('io.github.llamalad7:mixinextras-forge:0.5.0')
 }
 
