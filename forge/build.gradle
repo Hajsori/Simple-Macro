@@ -50,7 +50,7 @@ dependencies {
 
     // WebSocket
     implementation "org.java-websocket:Java-WebSocket:${websocket_version}"
-    jarJar("org.java-websocket:Java-WebSocket:[${websocket_version},3.0)")
+    jarJar("org.java-websocket:Java-WebSocket:${websocket_version}")
 
     // Simple Voice Chat
     implementation "maven.modrinth:simple-voice-chat:forge-${svc_version}"
