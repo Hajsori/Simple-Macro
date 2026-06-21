@@ -21,11 +21,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
 import org.java_websocket.WebSocket;
-import xyz.hajsori.simplemacro.Constants;
 import xyz.hajsori.simplemacro.config.ConsumeKeys;
-
-import java.util.Optional;
-import java.util.stream.Stream;
 
 
 public class ActionManager {
@@ -67,16 +63,16 @@ public class ActionManager {
                 String target = data.get("target").getAsString();
                 switch (target) {
                     case "adjustVolumes":
-                        minecraft.execute(() -> minecraft.setScreen(new AdjustVolumesScreen()));
+                        minecraft.execute(() -> minecraft.setScreenAndShow(new AdjustVolumesScreen()));
                         break;
                     case "groupManagement":
                         if (client != null && client.getConnection() != null && client.getConnection().getData().groupsEnabled()) {
                             ClientGroup group = playerStates.getGroup();
                             minecraft.execute(() -> {
                                 if (group != null) {
-                                    minecraft.setScreen(new GroupScreen(group));
+                                    minecraft.setScreenAndShow(new GroupScreen(group));
                                 } else {
-                                    minecraft.setScreen(new JoinGroupScreen());
+                                    minecraft.setScreenAndShow(new JoinGroupScreen());
                                 }
                             });
                         } else {
@@ -87,10 +83,10 @@ public class ActionManager {
                         }
                         break;
                     case "voiceChat":
-                        minecraft.execute(() -> minecraft.setScreen(new VoiceChatScreen()));
+                        minecraft.execute(() -> minecraft.setScreenAndShow(new VoiceChatScreen()));
                         break;
                     case "settings":
-                        minecraft.execute(() -> minecraft.setScreen(new VoiceChatSettingsScreen()));
+                        minecraft.execute(() -> minecraft.setScreenAndShow(new VoiceChatSettingsScreen()));
                         break;
                 }
             }
