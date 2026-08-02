@@ -1,31 +1,34 @@
 {
-  "schemaVersion": 1,
-  "id": "${mod_id}",
-  "version": "${version}",
-  "name": "${mod_name}",
-  "description": "${description}",
-  "authors": [
-    "${mod_author}"
-  ],
-  "contact": {
-    "sources": "https://github.com/Hajsori/SimpleMacro",
-    "discord": "https://discord.gg/jNxD65JBCv"
-  },
-  "license": "${license}",
-  "icon": "assets/${mod_id}/icon.png",
-  "environment": "*",
-  "entrypoints": {
-    "main": [
-      "xyz.hajsori.simplemacro.SimpleMacro"
-    ]
-  },
-  "mixins": [
-    "simplemacro.mixins.json"
-  ],
-  "depends": {
-    "fabricloader": ">=${fabric_loader_version}",
-    "minecraft": ">=${min_minecraft_version} <${excluded_minecraft_version}",
-    "java": ">=${java_version}",
-    "voicechat": ">=${svc_version}"
-  }
+    "schemaVersion": 1,
+    "id": "${mod_id}",
+    "version": "${version}",
+    "name": "${mod_name}",
+    "description": "${description}",
+    "authors": [
+        "${mod_author}"
+    ],
+    "contact": {
+        "sources": "https://github.com/Hajsori/SimpleMacro",
+        "discord": "https://discord.gg/jNxD65JBCv"
+    },
+    "license": "${license}",
+    "icon": "assets/${mod_id}/icon.png",
+    "environment": "*",
+    "entrypoints": {
+        "main": [
+            "xyz.hajsori.simplemacro.SimpleMacro"
+        ],
+        "voicechat": [
+            "xyz.hajsori.simplemacro.VoiceMacroPlugin"
+        ]
+    },
+    "mixins": [
+        "simplemacro.mixins.json"
+    ],
+    "depends": {
+        "fabricloader": ">=${fabric_loader_version}",
+        "minecraft": ">=${min_minecraft_version} <${excluded_minecraft_version}",
+        "java": ">=${java_version}",
+        "voicechat": ">=${svc_version}"
+    }
 }

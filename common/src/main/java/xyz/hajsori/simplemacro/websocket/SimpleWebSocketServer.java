@@ -55,7 +55,7 @@ public class SimpleWebSocketServer extends WebSocketServer {
 
     @Override
     public void onError(WebSocket webSocket, Exception e) {
-        Constants.LOGGER.error("Simple Macro WebSocket Server ran into an Problem: " + e);
+        Constants.LOGGER.error("Simple Macro WebSocket Server ran into an Problem: {}", String.valueOf(e));
     }
 
     @Override
