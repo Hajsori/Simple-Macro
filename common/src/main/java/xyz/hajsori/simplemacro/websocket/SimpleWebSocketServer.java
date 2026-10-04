@@ -11,7 +11,11 @@ import org.java_websocket.handshake.ClientHandshake;
 import org.java_websocket.server.WebSocketServer;
 import xyz.hajsori.simplemacro.Constants;
 
+import java.awt.*;
+import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 public class SimpleWebSocketServer extends WebSocketServer {
 
@@ -60,6 +64,12 @@ public class SimpleWebSocketServer extends WebSocketServer {
 
     @Override
     public void onStart() {
-        Util.getPlatform().openUri("streamdeck://plugins/message/xyz.hajsori.simplemacro.streamdeck/wss?streamdeck=hidden&port=" + this.getPort());
+        if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+            try {
+                Desktop.getDesktop().browse(new URI("streamdeck://plugins/message/xyz.hajsori.simplemacro.streamdeck/wss?streamdeck=hidden&port=" + this.getPort()));
+            } catch (IOException | URISyntaxException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 }
