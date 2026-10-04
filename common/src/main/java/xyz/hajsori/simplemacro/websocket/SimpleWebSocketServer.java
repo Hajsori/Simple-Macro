@@ -1,10 +1,12 @@
 package xyz.hajsori.simplemacro.websocket;
 
 import com.google.gson.JsonObject;
+import com.mojang.blaze3d.Blaze3D;
 import de.maxhenkel.voicechat.VoicechatClient;
 import de.maxhenkel.voicechat.voice.client.ClientManager;
 import de.maxhenkel.voicechat.voice.client.ClientPlayerStateManager;
 import de.maxhenkel.voicechat.voice.client.ClientVoicechat;
+import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.util.Util;
 import org.java_websocket.WebSocket;
 import org.java_websocket.handshake.ClientHandshake;
@@ -18,7 +20,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 public class SimpleWebSocketServer extends WebSocketServer {
-
     public SimpleWebSocketServer() {
         super(new InetSocketAddress(0));
     }
@@ -54,6 +55,7 @@ public class SimpleWebSocketServer extends WebSocketServer {
         if (Constants.CLIENT_CONFIG.logMessages.get()) {
             Constants.LOGGER.info("Received message from WebSocket Client with Port {}: {}", this.getPort(), message);
         }
+
         new ActionManager(message, webSocket);
     }
 
@@ -64,12 +66,14 @@ public class SimpleWebSocketServer extends WebSocketServer {
 
     @Override
     public void onStart() {
-        if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
-            try {
-                Desktop.getDesktop().browse(new URI("streamdeck://plugins/message/xyz.hajsori.simplemacro.streamdeck/wss?streamdeck=hidden&port=" + this.getPort()));
-            } catch (IOException | URISyntaxException e) {
-                throw new RuntimeException(e);
-            }
+        if (Constants.CLIENT_CONFIG.logMessages.get()) {
+            Constants.LOGGER.info("Simple Macro WebSocket Server started on Port {}", this.getPort());
+        }
+
+        try {
+            Blaze3D.openUri(new URI("streamdeck://plugins/message/xyz.hajsori.simplemacro.streamdeck/wss?streamdeck=hidden&port=" + this.getPort()));
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
         }
     }
 }
